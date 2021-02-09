@@ -57,3 +57,32 @@ def block(board):
         start_1,end_1 = start_1 + 1,end_1 + 1
         new_board.append(y_line + x_line)
     return new_board
+def validate_board(board):
+    '''
+    checks if the puzzle playing field is ready to start the game
+    >>> horizontal_check(["**** ****","***1 ****","**  3****","* 4 1****","     9 5 ","46  83  *","3      **","  8  2***","  2  ****"])
+    True
+    '''
+    if not horizontal_check(board):
+        return False
+    new_board = vertical_trans(board)
+    if not horizontal_check(new_board):
+        return False
+    last_board = block(board)
+    if not horizontal_check(last_board):
+        return False
+    return True
+
+if __name__ == "__main__":
+    board = [
+    "**** ****",
+    "***1 ****",
+    "**  3****",
+    "* 4 1****",
+    "     9 5 ",
+    "46  83  *",
+    "3      **",
+    "  8  2***",
+    "  4  ****"]
+    import doctest
+    doctest.testmod()
